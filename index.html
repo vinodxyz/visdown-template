@@ -11,83 +11,72 @@
     <script src="/lib/vega-embed.min.js"></script>
     <script src="/lib/marked.min.js"></script>
     <script src="/lib/yaml.min.js"></script>
-    
+
     <style>
       #visdown-output {
         max-width: 800px;
         margin: 0 auto;
       }
-    
+
       #visdown-input {
         display: none;
       }
-    </style>  
+    </style>
 
 </head>
 <body>
 
-<div id="visdown-input">  
-  # Visdown
+<div id="visdown-input">
+# Sample data
+```vis
+data:
+  url: "data/sample.csv"
+mark: circle
+encoding:
+  x:
+    type: quantitative
+    field: sales
+    axis:  null
+  y:
+    type: quantitative
+    field: profit
+    axis: null
+  color:
+    type: nominal
+    field: area
+    legend:
+  size:
+    value: 500
+config:
+  axis:
+    gridOpacity: 0
 
-  **Make visualisations using only markdown**
+```
 
-  Write visualisation using a simple declarative markup like you would write code. Just wrap it in fenced block (three backticks) and mark the language as `vis`.
+# Circulation notes
 
-  *Make simple static visualisations*
+```vis
+data:
+  url: "data/notes.csv"
+mark: area
+encoding:
+  x:
+    type: temporal
+    field: year
+  y:
+    type: quantitative
+    field: money
+    aggregate: sum
+  color:
+    type: nominal
+    field: denom
+width: 800
+height: 600
+```
 
-  ```vis
-  data:
-    url: data/cars.csv
-  mark: point
-  encoding:
-    x:
-      type: quantitative
-      field: kmpl
-    y:
-      type: quantitative
-      field: price
-  ```
-
-  Visdown is based on the grammar of interactive graphic (vega-lite) which allows you to specify the visualisation including interactions in a declarative fashion.
-
-  *Make interactive visualisations*
-
-  Select the circles with the mouse
-
-  ```vis
-  data:
-    url: "data/cars.csv"
-  mark: circle
-  selection:
-    brush:
-      type: interval
-  encoding:
-    x:
-      type: quantitative
-      field: kmpl
-      scale:
-       domain: [12,25]
-    y:
-      type: quantitative
-      field: price
-      scale:
-       domain: [100,900]
-    color:
-      condition:
-        selection: brush
-        field: type
-        type: nominal
-      value: grey
-    size:
-      type: quantitative
-      field: bhp
-  width: 450
-  height: 300
-  ```    
-    
 </div>
 <div id="visdown-output"></div>
-  
+
 <script src="visdown.js"></script>
 
 </body>
